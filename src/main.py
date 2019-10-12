@@ -1,5 +1,7 @@
+import os
 import sys
 import socket
+import signal
 import threading
 
 class Gateway:
@@ -9,6 +11,7 @@ class Gateway:
         self.tcp_sock = None
         self.threads = []
         self.__create_socket__()
+
     
     def __create_socket__(self):
         self.tcp_sock = socket.socket(socket.AF_INET, 
@@ -25,10 +28,11 @@ class Gateway:
         print ('Finalizando conexao do cliente', client)
         con.close()
 
-    def shutdown_server(self):
+    def shutdown_server(self, sig, frame):
         for thread in self.threads:
             thread.join()
-        return
+        print ("I am getting it out")
+        sys.exit(-1)
 
     def up_server(self):
         self.tcp_sock.listen()
@@ -43,7 +47,9 @@ class Gateway:
 
 def main():
     gw = Gateway()
+    signal.signal(signal.SIGINT, gw.shutdown_server)
     gw.up_server()
+
 
 if __name__ == "__main__":
     exit(main())
