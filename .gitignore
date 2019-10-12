@@ -1,0 +1,6 @@
+.vscode/
+bin/
+figures/
+include/
+lib/
+lib64
