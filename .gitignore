@@ -4,3 +4,5 @@ figures/
 include/
 lib/
 lib64
+__pycache__/*
+**/*.pyc
