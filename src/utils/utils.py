@@ -17,3 +17,6 @@ class Constants:
     INT_SIZE_IN_BYTES = 4
     FLOAT_SIZE_IN_BYTES = 4
     TIME_T_SIZE_IN_BYTES = 8
+
+    NUM_MESSAGES_PER_CLIENT = 50
+    NUM_CLIENTS = 1

@@ -23,6 +23,8 @@ def main():
     historian_gateway.join()
     historian_server_app.join()
 
+    return 0
+
 
 if __name__ == "__main__":
-    exit(main())
+    sys.exit(main())

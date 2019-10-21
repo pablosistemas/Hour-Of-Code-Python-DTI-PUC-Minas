@@ -34,7 +34,7 @@ class Clients:
         gw_pos_socket.connect(('127.0.0.1', Constants.GATEWAY_PORT))
 
         i = 0
-        while(i < 50):
+        while(i < Constants.NUM_MESSAGES_PER_CLIENT):
             position_list = (
                 random.randint(1,10),
                 calendar.timegm(time.gmtime()),
@@ -74,5 +74,5 @@ class Clients:
                 "Accept-Encoding: gzip\r\n\r\n"
 
 if __name__ == "__main__":
-    clients = Clients(1)
+    clients = Clients(Constants.NUM_CLIENTS)
     clients.send_messages()
