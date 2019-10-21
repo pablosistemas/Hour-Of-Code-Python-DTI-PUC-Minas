@@ -21,11 +21,6 @@ class Gateway:
                 self.port, socket.SOCK_STREAM)
         self.historian_client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         
-        # send fake messages to historian 
-        # self.threads.append(threading.Thread(target=self.send_position_to_historian))
-        # self.threads[-1].start()
-        
-
     @staticmethod
     def __create_socket__(host, port, sock_type):
         tcp_sock = socket.socket(socket.AF_INET, sock_type)    
@@ -41,18 +36,6 @@ class Gateway:
             float(position_list[3]),
             int(position_list[4]))
 
-    def fake_message_to_historian(self):
-        time.sleep(10)
-        while(True):
-            position_t = struct.pack(Constants.PACK_POSITION_T_STRING, 
-                random.randint(1,10),
-                calendar.timegm(time.gmtime()),
-                random.uniform(100, 300),
-                random.uniform(100, 300),
-                random.randint(40,160))
-
-            self.send_position_to_historian(position_t)
-            time.sleep(5)
 
     def send_position_to_historian(self, position_t):
         self.historian_client.sendto(
@@ -61,7 +44,7 @@ class Gateway:
 
 
     def parse_client_position_message(self, position_qry):
-        match_http_get = r'^GET\s\/\?id=(.+)&timestamp=(\d+)&lat=([\+|-]*\d+\.\d+)&lon=([\+|-]*\d+\.\d+)&speed=(\d+)&bearing=(\d+)&altitude=(\d+)&batt=(\d+\.\d+)\sHTTP\/1\.1\r\nUser\-Agent:\s.+\r\nHost:\s\d+\.\d+\.\d+\.\d+:\d+\r\nConnection:\sKeep\-Alive\r\nAccept\-Encoding:\sgzip\r\n\r\n'
+        match_http_get = r'^POST\s\/\?id=(.+)&timestamp=(\d+)&lat=([\+|-]*\d+\.\d+)&lon=([\+|-]*\d+\.\d+)&speed=(\d+)&bearing=(\d+)&altitude=(\d+)&batt=(\d+\.\d+)\sHTTP\/1\.1\r\nUser\-Agent:\s.+\r\nHost:\s\d+\.\d+\.\d+\.\d+:\d+\r\nConnection:\sKeep\-Alive\r\nAccept\-Encoding:\sgzip\r\n\r\n'
         match_obj = re.match(match_http_get, position_qry)
         return match_obj
 

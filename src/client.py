@@ -67,7 +67,7 @@ class Clients:
     @staticmethod
     def __format_http_get__(position_qry):
         user_agent = 'Python / 3.5.3 Hour of Code DTI Digital / PUC Minas'
-        return "GET /?{} HTTP/1.1\r\n".format(position_qry) + \
+        return "POST /?{} HTTP/1.1\r\n".format(position_qry) + \
                 "User-Agent: {}\r\n".format(user_agent) + \
                 "Host: {}:{}\r\n".format(Constants.GATEWAY_HOST, Constants.GATEWAY_PORT) + \
                 "Connection: Keep-Alive\r\n" + \
@@ -76,8 +76,3 @@ class Clients:
 if __name__ == "__main__":
     clients = Clients(1)
     clients.send_messages()
-    # clients.configure_alarm(5)
-    # final_thread = threading.Thread(name='finalize_app_daemon', 
-        # target=clients.trap_handler_for_ending_app)
-    # final_thread.setDaemon(True)
-    # final_thread.start()

@@ -21,6 +21,7 @@ class SQLiteManager:
             LONGITUDE      TEXT  NOT NULL,
             SPEED          TEXT  NOT NULL);
         """)
+        self.conn.commit()
     
     def insert_position_into_db(self, position_list):
         self.cursor.execute("""

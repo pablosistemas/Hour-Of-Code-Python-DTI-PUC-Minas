@@ -14,8 +14,7 @@ def main():
     gateway = threading.Thread(target=gw.up_server)
     historian_gateway = threading.Thread(target=hist.up_server)
     historian_server_app = threading.Thread(target=hist.up_server_app)
-    # signal.signal(signal.SIGINT, gw.shutdown_server)
-    # signal.signal(signal.SIGTERM, gw.shutdown_server)
+    
     gateway.start()
     historian_gateway.start()
     historian_server_app.start()

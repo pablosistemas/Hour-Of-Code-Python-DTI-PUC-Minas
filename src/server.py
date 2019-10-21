@@ -39,6 +39,7 @@ class AppServer:
             msg = input()
 
         self.server_app_historian_fd.close()
+        return 0
 
     def send_request_to_historian(self, imei, length):
         self.server_app_historian_fd.sendto(struct.pack('ii', imei, length), self.dest)
